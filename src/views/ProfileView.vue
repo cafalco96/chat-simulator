@@ -1,0 +1,48 @@
+<script>
+import { mapState, mapMutations, mapActions } from 'vuex';
+export default {
+  computed: {
+    ...mapState({
+      username:(state) => state.profile.username
+    })
+  },
+  methods:{
+    // ...mapMutations(['updateUsername'])
+    ...mapActions('profile',['updateUsername'])
+  }
+}
+</script>
+<template>
+  <div class="profile">
+    <div class="box">
+      <img src="/avatars/avatar.jpg" alt="avatar" />
+      <label for="username">User Name</label>
+      <input type="text" placeholder="username" 
+      :value="username"
+      @input="updateUsername($event.target.value)"
+      />
+      <button @click="$router.push('/')">Login</button>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.profile {
+  @apply flex justify-center items-center h-screen;
+  .box {
+    @apply flex flex-col items-center gap-2 p-6 rounded-xl bg-zinc-800;
+    img {
+      @apply w-32 rounded-full border-8 border-zinc-600;
+    }
+    label {
+      @apply w-full;
+    }
+    input {
+      @apply px-3 py-2 rounded-md bg-zinc-900;
+    }
+    button {
+      @apply w-full px-3 py-2 mt-2 rounded-md bg-zinc-600;
+    }
+  }
+}
+</style>
